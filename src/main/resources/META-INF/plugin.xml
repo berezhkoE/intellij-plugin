@@ -1,18 +1,31 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.berezhkoe.intellijplugin</id>
-    <name>intellij-plugin</name>
+    <name>Internship-Test</name>
     <vendor>berezhkoe</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.berezhkoe.intellijplugin.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.berezhkoe.intellijplugin.services.MyProjectService"/>
+        <editorNotificationProvider implementation="com.github.berezhkoe.intellijplugin.MyExtensionNotificationProvider"/>
     </extensions>
 
     <applicationListeners>
         <listener class="com.github.berezhkoe.intellijplugin.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+    <actions>
+        <action id="com.github.berezhkoe.intellijplugin.MyCurrentProjectAndFileAction" class="com.github.berezhkoe.intellijplugin.MyCurrentProjectAndFileAction"
+                text="Show Current Project and File Names">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        <action id="com.github.berezhkoe.intellijplugin.MyCurrentMethodAction"
+                class="com.github.berezhkoe.intellijplugin.MyCurrentMethodAction" text="Show Current Method Info">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>
